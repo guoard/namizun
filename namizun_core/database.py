@@ -1,5 +1,5 @@
 from redis import Redis
-from os import system, path
+from os import system, path, environ
 from random import randint
 
 parameters = [
@@ -17,7 +17,7 @@ buffers_weight = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 def singleton():
     global namizun_db
     if namizun_db is None:
-        namizun_db = Redis()
+        namizun_db = Redis.from_url(environ.get('REDIS_URI'))
     return namizun_db
 
 
